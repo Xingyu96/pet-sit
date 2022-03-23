@@ -1,0 +1,40 @@
+<nav class="navbar has-background-info-dark">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item my-navbar-logo" href="/">
+        <figure class="image large">
+          <img class="is-rounded" src="/static/dog-logo-png.png" alt="Logo">
+        </figure>
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <% if(locals.email) { %>
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a href="/dashboard" class="navbar-item">
+            <%= email %>
+              <i class="material-icons">person_outline</i>
+          </a>
+          <div class="navbar-item">
+            <a href="/sessionLogout" class="button is-primary">Log Out
+            </a>
+          </div>
+        </div>
+      </div>
+      <% } else if(locals.hideSignIn) { %>
+      <% } else { %>
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <a href="/sign-in" class="button is-primary">Sign In
+              </a>
+            </div>
+          </div>
+        </div>
+      <% }%>
+  </div>
+</nav>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head') %>
+  <style>
+    .pad-left {
+      padding-left: 15px;
+      border-style: none solid none none;
+      border-color: grey;
+      border-width: 2px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <%- include('../partials/nav', { email: user.email }) %>
+  </header>
+
+    <br/>
+    <div class="columns">
+      <div class="column is-2 ">
+        <aside class="menu pad-left">
+          <p class="menu-label">
+            General
+          </p>
+          <ul class="menu-list">
+            <li><a>Feed</a></li>
+
+          </ul>
+        </aside>
+      </div>
+      <div class="column is-4-desktop is-offset-2-desktop is-8-tablet">
+        <div class="mb-6">
+          <div class="box">
+            <div class="has-text-weight-bold mb-2">
+              Share a new post
+            </div>
+            <form action="/dog-messages" method="post">
+              <input class="input" type="text" name="message" placeholder="Went to the dog park today" />
+              <button class="button mt-2">Ruff!</button>
+            </form>
+          </div>
+        </div>
+        <div class="feed-stream">
+          <%- include('../partials/feed-stream', { feed: feed }) %>
+        </div>
+      </div>
+    </div>
+
+</body>
+
+<%- include('../partials/footer') %>
+
+</html>
