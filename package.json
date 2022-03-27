@@ -2,7 +2,7 @@
   "name": "2022-cs-5356-milestone-1",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "nodemon src/index.js"
   },
@@ -16,6 +16,7 @@
     "eslint": "^8.9.0",
     "express": "^4.17.2",
     "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.19.0",
     "nodemon": "^2.0.15",
     "sass": "^1.49.7"
   },

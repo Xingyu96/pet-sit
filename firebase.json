@@ -1,9 +1,10 @@
 {
   "functions": {
-    "source": "functions",
+    "source": "./",
     "predeploy": [
       "npm --prefix \"$RESOURCE_DIR\" run lint"
-    ]
+    ],
+    "runtime": "nodejs16"
   },
   "database": {
     "rules": "database.rules.json"
@@ -18,12 +19,6 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
     ]
   },
   "storage": {

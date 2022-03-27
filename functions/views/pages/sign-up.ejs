@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head') %>
+</head>
+
+<body>
+  <header>
+    <%- include('../partials/nav') %>
+  </header>
+  
+    <div class="container">
+      <section class="section">
+      </section>
+      <div class="columns">
+        <div class="column is-one-third">
+        </div>
+        <div class="column is-one-third">
+          <div class="box">
+            <h3 class="title"> Sign Up</h3>
+            <p> Sign up for a new account or <a href="/sign-in">click here to sign in with an existing account</a> </p>
+            <br/>
+            <form id="login-form">
+              <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                  <input class="input" type="text" name="login" placeholder="Your email">
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                  <input class="input" type="password" name="password" id="password" placeholder="Your password">
+                </div>
+              </div>
+              <div class="field">
+                <div id="login-error"></div>
+              </div>
+              <div class="field is-grouped">
+                <div class="control">
+                  <button class="button is-primary">Create Account</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="column is-one-third">
+        </div>
+      </div>
+    </div>
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
+
+<script>
+  function setFormError(errorMessage) {
+    document.getElementById("login-error").innerHTML = 
+      '<div class="has-text-danger">' +
+        errorMessage +
+      '</div>'
+  }
+  
+  function clearFormError() {
+    document.getElementById("login-error").innerHTML = ""
+  }
+  
+  window.onload = () => {
+    console.log('Running onload')
+    const firebaseConfig = {
+      apiKey: "AIzaSyAgz9vCHbxEAz8bfF9Ycyjw2LoS9B_jwXQ",
+      authDomain: "cs5356-fffd1.firebaseapp.com",
+      projectId: "cs5356-fffd1",
+      storageBucket: "cs5356-fffd1.appspot.com",
+      messagingSenderId: "354809257551",
+      appId: "1:354809257551:web:b3606dfcbed9f98bda943a",
+      measurementId: "G-YHZ8CE0LY2"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth(app);
+
+    app.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+
+    document
+      .getElementById("login-form")
+      .addEventListener("submit", (event) => {
+        event.preventDefault();
+        const login = event.target.login.value;
+        const password = event.target.password.value;
+        
+          if (login.length == 0 || password.length == 0) {
+            let errorMessage = 'Either the email or password field is blank. Please fill them in.'
+            setFormError(errorMessage)
+            return
+          }
+
+        auth.createUserWithEmailAndPassword(login, password)
+          .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            
+            user.getIdToken().then((idToken) => { 
+              fetch('/sessionLogin', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ idToken })
+              }).then(() => {
+                window.location.href = '/dashboard'
+              })
+            })
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setFormError(errorMessage);
+          });
+      });
+  };
+</script>
+
+</html>

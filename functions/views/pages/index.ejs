@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head') %>
+    <!-- Include any custom css classes that you want available on this page here -->
+    <style>
+      .big-box { 
+        height: 100vh;
+      }
+      .my-hero {
+        margin-bottom: 2em;
+      }
+      .my-level p {
+        color: white;
+        padding-bottom: 1em;
+      }
+      .center {
+        text-align: center;
+      }
+
+    </style>
+</head>
+
+<body class="has-background-success">
+  <header>
+    <%- include('../partials/nav') %>
+  </header>
+  <section class="hero my-hero is-warning is-halfheight">
+    <div class="hero-body">
+      <div class="container">
+        <p class="title">
+          RuffHouse
+        </p>
+        <p class="subtitle">
+          A social site for your furry family!
+        </p>
+        <a href="/sign-up" class="button is-primary">Sign Up</a>
+      </div>
+    </div>
+  </section>
+  <nav class="level my-level container">
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="title">Share</p>
+        <p class="subtitle">Post pictures of your pets!</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="title">Socialize</p>
+        <p class="subtitle">Connect with other pet owners!</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="title">Smile</p>
+        <p class="subtitle">Give them a thumbs up!</p>
+      </div>
+    </div>
+  </nav>
+  <section class="hero is-success is-halfheight">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <p class="subtitle center">
+              RuffHouse is a social site where you can upload and share pictures of your pets!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+<%- include('../partials/footer') %>
+
+</html>
