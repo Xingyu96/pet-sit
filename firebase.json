@@ -22,7 +22,7 @@
     ],
     "rewrites": [{
       "source": "**",
-      "fucntion": "helloWorld"
+      "function": "helloWorld"
     }]
   },
   "storage": {
