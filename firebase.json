@@ -19,7 +19,11 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "rewrites": [{
+      "source": "**",
+      "fucntion": "helloWorld"
+    }]
   },
   "storage": {
     "rules": "storage.rules"
