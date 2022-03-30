@@ -55,17 +55,20 @@ app.post("/sessionLogin", async (req, res) => {
     .then(
       sessionCookie => {
         const options = { maxAge: expiresIn, httpOnly: true };
-        res.cookie("session", sessionCookie, options);
+        res.setHeader('Cache-Control', 'private');
+        res.cookie("__session", sessionCookie, options);
         res.status(200).send(JSON.stringify({ status: "success" }));
       },
       error => {
+        console.log("error for token: " + idToken);
+        console.log(error);
         res.status(401).send("UNAUTHORIZED REQUEST!");
       }
     );
 });
 
 app.get("/sessionLogout", (req, res) => {
-  res.clearCookie("session");
+  res.clearCookie("__session");
   res.redirect("/sign-in");
 });
 
