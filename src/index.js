@@ -8,11 +8,12 @@ const admin = require("firebase-admin");
 const app = express();
 const port = process.env.PORT || 8080;
 const serviceAccount = require("./../config/serviceAccountKey.json");
-const userFeed = require("./app/user-feed");
 const authMiddleware = require("./app/auth-middleware");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
+
+const userFeed = require("./app/pet-sit-firestore");
 
 // use cookies
 app.use(cookieParser());
