@@ -7,28 +7,41 @@
     .pad-left {
       padding-left: 15px;
     }
+    .pad-right {
+      padding-right: 15px;
+    }
+    html {
+      background-color: #FFE08A;
+    }
+    .grey-background {
+      background-color: #FFE08A;
+    }
   </style>
 
 </head>
 
-<body>
+<body class="grey-background">
   <header>
     <%- include('../partials/nav', { email: user.email }) %>
   </header>
 
     <br/>
-    <div class="columns">
-      <div class="column is-2 ">
-        <aside class="menu pad-left">
-          <!-- post code-->
-          <div class="field">
-            <label class="label">Board near</label>
-            <div class="control">
-              <input class="input" type="text" placeholder="Your postal code">
-            </div>  
-          </div>
-          <!-- post code-->
-
+    <div class="columns is-multiline">
+      <div class="column is-offset-2 is-8 pad-left">
+        <div class="field has-addons">
+          <div class="control is-expanded">
+            <input class="input" type="text" placeholder="Your postal code">
+          </div>  
+          <div class="control">
+            <!-- Find button-->
+            <button class="button is-primary">Find!</button>
+            <!-- Find button--> 
+          </div> 
+        </div>
+      </div>
+      <div class="column is-2 is-offset-2  ">
+        <aside class="menu">
+          <div class="title">Filters</div>
           <!-- date picker-->
           <!-- 可以放一个date picker这里-->
           <!-- date picker-->
@@ -97,23 +110,39 @@
           </div>
           <!-- select pet size-->
 
-          <!-- Find button-->
-          <label class="label">Now find your hosts!</label>
-          <button class="button is-primary">Find!</button>
-          <!-- Find button-->
+
         </aside>
       </div>
-      <div class="column is-4-desktop is-offset-2-desktop is-8-tablet">
-        <div class="title">Available Pet-sitters.</div>
-        <div class="feed-stream">
-          <%- include('../partials/feed-stream', { feed: feed }) %>
-        </div>
-      
+      <div class="table-container column is-6-desktop is-6-tablet">
+        <div class="title">Available Pet-sitters</div>
+        <table class="table is-fullwidth is-hoverable grey-background">
+          <thead>
+            <tr>
+              <th>Pet-sit Spot</th>
+              <th>Address</th>
+              <th>Rate</th>
+              <th>Email</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Pet-sit Spot</th>
+              <th>Address</th>
+              <th>Rate</th>
+              <th>Email</th>
+              <th></th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <%- include('../partials/feed-stream', { feed: feed }) %>
+          </tbody>
+        </table>
       </div>
-    </div>
+      
+      <div class="column is-2">
 
-    <!-- divide         -->
-    
+      </div> 
 </body>
 
 <%- include('../partials/footer') %>

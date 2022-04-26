@@ -21,12 +21,16 @@ const db = firebase.firestore();
 
 
 const get = async () => {
-  await db.collection("pet-sit").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      petSitters.push(doc.data());
-      console.log(doc.data());
+  if (petSitters.length === 0) {
+    await db.collection("pet-sit").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        petSitters.push(doc.data());
+        console.log(doc.data());
+      });
     });
-  });
+  } else {
+    return petSitters;
+  }
   
   return petSitters;
 }
