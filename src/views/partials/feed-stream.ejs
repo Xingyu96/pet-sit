@@ -22,18 +22,26 @@
         
         <div class="field">
           <label class="label">Drop off date</label>
-          <div class="control">
-            <input class="input" type="text" placeholder="Text input">
+          <div class="select">
+            <select>
+              <% feedItem.availability.forEach(function(avail) { %>
+                <option><%= avail%></option>
+              <% }) %>
+            </select>
           </div>
         </div>
-        
+
         <div class="field">
           <label class="label">Pick up date</label>
-          <div class="control">
-            <input class="input" type="text" placeholder="Text input">
+          <div class="select">
+            <select>
+              <% feedItem.availability.forEach(function(avail) { %>
+                <option><%= avail%></option>
+              <% }) %>
+            </select>
           </div>
         </div>
-        
+
         <div class="field is-grouped">
           <div class="control">
             <button class="button is-danger submit-bookingconf" data-target="#modal-confirm-booking-<%= feedItem.email%>">Submit</button>
@@ -42,10 +50,12 @@
             <button class="button is-link is-light close-bookingconf" data-target="#modal-confirm-booking-<%= feedItem.email%>">Cancel</button>
           </div>
         </div>
+
       </div>
     </div>
     <button class="modal-close is-large close-bookingconf" data-target="#modal-confirm-booking-<%= feedItem.email%>" aria-label="close"></button>
   </div>
+  
 <% }) %>
 
 <script>
