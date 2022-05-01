@@ -4,10 +4,10 @@
     <td><%= feedItem.address %></td>
     <td>$<%= feedItem.rate %>/hr</td>
     <td><%= feedItem.email %></td>
-    <td><button class="button is-danger start-booking" data-target="#modal-confirm-booking-<%= feedItem.email%>">Book</button></td>
+    <td><button class="button is-danger start-booking" data-target="#modal-confirm-booking&<%= feedItem.email%>">Book</button></td>
   </tr>
   
-  <div id="modal-confirm-booking-<%= feedItem.email%>" class="modal">
+  <div id="modal-confirm-booking&<%= feedItem.email%>" class="modal">
     <div class="modal-background"></div>
     <div class="modal-content">
       <div class="box">
@@ -23,7 +23,7 @@
         <div class="field">
           <label class="label">Drop off date</label>
           <div class="select">
-            <select>
+            <select id="select-date-1&<%= feedItem.email%>">
               <% feedItem.availability.forEach(function(avail) { %>
                 <option><%= avail%></option>
               <% }) %>
@@ -34,7 +34,7 @@
         <div class="field">
           <label class="label">Pick up date</label>
           <div class="select">
-            <select>
+            <select id="select-date-2&<%= feedItem.email%>">
               <% feedItem.availability.forEach(function(avail) { %>
                 <option><%= avail%></option>
               <% }) %>
@@ -44,16 +44,16 @@
 
         <div class="field is-grouped">
           <div class="control">
-            <button class="button is-danger submit-bookingconf" data-target="#modal-confirm-booking-<%= feedItem.email%>">Submit</button>
+            <button class="button is-danger submit-bookingconf" data-target="#modal-confirm-booking&<%= feedItem.email%>">Submit</button>
           </div>
           <div class="control">
-            <button class="button is-link is-light close-bookingconf" data-target="#modal-confirm-booking-<%= feedItem.email%>">Cancel</button>
+            <button class="button is-link is-light close-bookingconf" data-target="#modal-confirm-booking&<%= feedItem.email%>">Cancel</button>
           </div>
         </div>
 
       </div>
     </div>
-    <button class="modal-close is-large close-bookingconf" data-target="#modal-confirm-booking-<%= feedItem.email%>" aria-label="close"></button>
+    <button class="modal-close is-large close-bookingconf" data-target="#modal-confirm-booking&<%= feedItem.email%>" aria-label="close"></button>
   </div>
   
 <% }) %>
@@ -80,7 +80,15 @@ function openModal(event) {
 }
 
 function submitBooking(event) {
-  let email = event.target.getAttribute("data-target").split('@')[1];
+  let email = event.target.getAttribute("data-target").split('&')[1];
+  let user_email = document.getElementById("user-email")
+    .textContent.split(" ")
+    .filter(w => w.length > 0)[1];
+  let dropOffDate = document.getElementById("select-date-1&" + email).value;
+  let pickUpDate = document.getElementById("select-date-2&" + email).value;
+  console.log("dropoff: " + dropOffDate);
+  console.log("pickup: " + pickUpDate);
+  console.log("customer: " + user_email);
   console.log("submit booking for email: " + email);
   
   closeModal(event);
