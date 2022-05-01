@@ -50,7 +50,7 @@ app.get("/dashboard", authMiddleware, async function (req, res) {
   let curUser = {
     name: "John Smith",
     phone: "123-456-7890",
-    addres: "123 Main St."
+    address: "123 Main St."
   };
   users.forEach((u) => {
     if (u.email === req.user.email) curUser = u;
