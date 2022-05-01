@@ -63,6 +63,7 @@ let petSitterBookings = document.getElementsByClassName("start-booking");
 let submitButtons = document.getElementsByClassName("submit-bookingconf");
 let cancelButtons = document.getElementsByClassName("close-bookingconf");
 
+
 for(let el of petSitterBookings) {
   el.addEventListener("click", openModal);
 }
@@ -86,6 +87,37 @@ function submitBooking(event) {
     .filter(w => w.length > 0)[1];
   let dropOffDate = document.getElementById("select-date-1&" + email).value;
   let pickUpDate = document.getElementById("select-date-2&" + email).value;
+
+  // connect to db
+  const firebaseConfig = {
+    apiKey: "AIzaSyAgz9vCHbxEAz8bfF9Ycyjw2LoS9B_jwXQ",
+    authDomain: "cs5356-fffd1.firebaseapp.com",
+    projectId: "cs5356-fffd1",
+    storageBucket: "cs5356-fffd1.appspot.com",
+    messagingSenderId: "354809257551",
+    appId: "1:354809257551:web:b3606dfcbed9f98bda943a",
+    measurementId: "G-YHZ8CE0LY2"
+  };
+
+  const app = firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+  // end of connect db
+
+  // add booking
+  var a = 'bookings.'+user_email.slice(0,-5);
+  let b = pickUpDate+','+dropOffDate
+  var req = {[`${a}`] : b}
+
+  console.log(req)
+  db.collection("pet-sit").doc(email).update(req)
+    .then(() => {
+      console.log("a:"+a)
+      console.log("b:"+b)
+      console.log("Document successfully updated!");
+    });
+  // end of add booking
+
+
   console.log("dropoff: " + dropOffDate);
   console.log("pickup: " + pickUpDate);
   console.log("customer: " + user_email);
