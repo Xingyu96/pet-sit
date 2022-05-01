@@ -35,6 +35,25 @@ const get = async () => {
   return petSitters;
 }
 
+const getUserBookings = (email) => {
+  let bookings = [];
+  let emailPart = email.slice(0,-4);
+  console.log(emailPart);
+  petSitters.forEach((sitter) => {
+    if (sitter.bookings[emailPart] != null) {
+      bookings.push({
+        sitter: sitter.email,
+        address: sitter.address,
+        name: sitter.name,
+        dates: sitter.bookings[emailPart],
+      });
+    }
+  });
+  console.log("getting user bookings: " + bookings);
+  return bookings;
+}
+
 module.exports = {
   get,
+  getUserBookings,
 };

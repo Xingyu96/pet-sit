@@ -45,7 +45,8 @@ app.get("/sign-up", function (req, res) {
 
 app.get("/dashboard", authMiddleware, async function (req, res) {
   const feed = await userFeed.get();
-  res.render("pages/dashboard", { user: req.user, feed });
+  const bookings = userFeed.getUserBookings(req.user.email);
+  res.render("pages/dashboard", { user: req.user, feed: feed, bookings: bookings});
 });
 
 app.post("/sessionLogin", async (req, res) => {

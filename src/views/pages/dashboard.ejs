@@ -138,6 +138,8 @@
             <%- include('../partials/feed-stream', { feed: feed }) %>
           </tbody>
         </table>
+        <div class="title">My Bookings</div>
+        <%- include('../partials/bookings', {bookings: bookings }) %>
       </div>
       
       <div class="column is-2">
@@ -177,6 +179,9 @@ window.onload = () => {
 //   });
 
 }
+// 
+// let data = <%-JSON.stringify(feed)%>
+// console.log(data);
 
 </script>
 

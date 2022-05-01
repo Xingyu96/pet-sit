@@ -1,0 +1,27 @@
+﻿<table class="table is-fullwidth is-hoverable grey-background">
+  <thead>
+    <tr>
+      <th>Pet-sit Spot</th>
+      <th>Address</th>
+      <th>Dates</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th>Pet-sit Spot</th>
+      <th>Address</th>
+      <th>Dates</th>
+    </tr>
+  </tfoot>
+  <tbody>
+    <% bookings.forEach(function(sitter) { %>
+      <tr>
+        <td><%= sitter.name %></td>
+        <td><%= sitter.address %></td>
+        <td><%= sitter.dates %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+
