@@ -55,7 +55,6 @@ app.get("/dashboard", authMiddleware, async function (req, res) {
   users.forEach((u) => {
     if (u.email === req.user.email) curUser = u;
   });
-  console.log(users);
   res.render("pages/dashboard", { 
     user: req.user, 
     feed: feed, 
@@ -63,6 +62,26 @@ app.get("/dashboard", authMiddleware, async function (req, res) {
     curUser: curUser
   });
 });
+
+app.post("/updateDashboard", async (req, res) => {
+  const feed = await userFeed.get();
+  const bookings = userFeed.getUserBookings(req.user.email);
+  const users = await userFeed.getUsers();
+  let curUser = {
+    name: "John Smith",
+    phone: "123-456-7890",
+    addres: "123 Main St."
+  };
+  users.forEach((u) => {
+    if (u.email === req.user.email) curUser = u;
+  });
+  res.render("pages/dashboard", {
+    user: req.user,
+    feed: feed,
+    bookings: bookings,
+    curUser: curUser
+  });
+})
 
 app.post("/sessionLogin", async (req, res) => {
   const idToken = req.body.idToken

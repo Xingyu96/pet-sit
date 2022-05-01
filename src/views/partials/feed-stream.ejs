@@ -123,7 +123,20 @@ function submitBooking(event) {
   console.log("customer: " + user_email);
   console.log("submit booking for email: " + email);
   
+  // trigger server rerender
+  
+  for (let i = 0; i < 4; i++) {
+    fetch('/updateDashboard', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: {}
+    });
+  }
+
   closeModal(event);
+  
+  window.location.reload();
+  window.location.reload();
 }
 
 function cancelBooking(event) {  
