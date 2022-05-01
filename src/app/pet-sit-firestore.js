@@ -2,6 +2,7 @@
 require("firebase/firestore");
 
 const petSitters = [];
+const users = [];
 
 const firebaseConfig = {
   apiKey: "AIzaSyAgz9vCHbxEAz8bfF9Ycyjw2LoS9B_jwXQ",
@@ -53,7 +54,23 @@ const getUserBookings = (email) => {
   return bookings;
 }
 
+const getUsers = async () => {
+  if (users.length === 0) {
+    await db.collection("user-info").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        users.push(doc.data());
+        console.log(doc.data());
+      });
+    });
+  } else {
+    return users;
+  }
+
+  return users;
+}
+
 module.exports = {
   get,
+  getUsers,
   getUserBookings,
 };

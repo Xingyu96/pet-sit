@@ -109,6 +109,33 @@
               </a>
           </div>
           <!-- select pet size-->
+          <div class="label">My Profile</div>
+          <div class="field">
+            <label class="label is-small">Name</label>
+            <div class="control">
+              <input id="user-info-name" class="input is-small" type="text" placeholder="<%= curUser.name %>" value="<%= curUser.name %> ">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-small">Phone</label>
+            <div class="control">
+              <input id="user-info-phone" class="input is-small" type="text" placeholder="<%= curUser.phone %>" value="<%= curUser.phone %> ">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-small">Address</label>
+            <div class="control">
+              <input id="user-info-address" class="input is-small" type="text" placeholder="<%= curUser.address %>" value="<%= curUser.address %> ">
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <div class="control">
+              <button id="user-info-submit" class="button is-danger is-small" data-target="">Update</button>
+            </div>
+            <div class="control">
+              <button id="user-info-cancel" class="button is-link is-light is-small" data-target="">Cancel</button>
+            </div>
+          </div>
 
 
         </aside>
@@ -167,21 +194,57 @@ window.onload = () => {
 
   const app = firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
-  
-  
-  // uncomment in testing
-//   db.useEmulator("http://localhost:8082");
-  
-//   db.collection("pet-sit").get().then((querySnapshot) => {
-//       querySnapshot.forEach((doc) => {
-//           console.log(doc.data());
-//       });
-//   });
-
 }
-// 
-// let data = <%-JSON.stringify(feed)%>
-// console.log(data);
+
+let submitUserUpdateButton = document.getElementById("user-info-submit");
+let cancelUserUpdateButton = document.getElementById("user-info-cancel");
+
+submitUserUpdateButton.addEventListener("click", updateUserInfo);
+cancelUserUpdateButton.addEventListener("click", cancelUserUpdate);
+
+function updateUserInfo(event) {
+  let user_email = document.getElementById("user-email")
+    .textContent.split(" ")
+    .filter(w => w.length > 0)[1];
+  let docKey = user_email.slice(0,-5);
+  let name = document.getElementById("user-info-name").value;
+  let phone = document.getElementById("user-info-phone").value;
+  let address = document.getElementById("user-info-address").value;
+  
+  let updateDoc = {
+    name: name,
+    phone: phone,
+    address: address
+  }
+
+  // connect to db
+  const firebaseConfig = {
+    apiKey: "AIzaSyAgz9vCHbxEAz8bfF9Ycyjw2LoS9B_jwXQ",
+    authDomain: "cs5356-fffd1.firebaseapp.com",
+    projectId: "cs5356-fffd1",
+    storageBucket: "cs5356-fffd1.appspot.com",
+    messagingSenderId: "354809257551",
+    appId: "1:354809257551:web:b3606dfcbed9f98bda943a",
+    measurementId: "G-YHZ8CE0LY2"
+  };
+
+  const app = firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+  // end of connect db
+  
+  db.collection("user-info").doc(docKey).update(updateDoc);
+}
+
+function cancelUserUpdate(event) {
+  console.log("cancel udpate"); 
+  let name = document.getElementById("user-info-name");
+  let phone = document.getElementById("user-info-phone");
+  let address = document.getElementById("user-info-address");
+  
+  document.getElementById("user-info-name").value = <%- JSON.stringify(curUser.name) %>;
+  document.getElementById("user-info-phone").value = <%- JSON.stringify(curUser.phone) %>;
+  document.getElementById("user-info-address").value = <%- JSON.stringify(curUser.address) %>;
+}
 
 </script>
 
